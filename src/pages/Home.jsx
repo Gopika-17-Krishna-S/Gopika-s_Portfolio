@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import gopikaImg from '../assets/gopika.jpeg';
+import echoSpaceLogo from '../assets/echospace-logo.jpeg';
 
 const ArrowDown = () => (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
@@ -82,17 +83,7 @@ export default function Home() {
             </section>
 
             {/* Brief intro */}
-            <section
-                style={{
-                    padding: '6rem 6rem',
-                    borderTop: '1px solid #e4e4e7',
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
-                    gap: '4rem',
-                    alignItems: 'center',
-                }}
-                className="intro-lower"
-            >
+            <section className="intro-lower">
                 <div>
                     <p className="section-label">Who am I</p>
                     <h2 className="section-title" style={{ marginBottom: '1.5rem', textTransform: 'uppercase' }}>
@@ -121,16 +112,11 @@ export default function Home() {
                         Read more about me ↗
                     </Link>
                 </div>
-                <style>{`
-          @media (max-width: 1024px) {
-            .intro-lower { grid-template-columns: 1fr !important; padding: 4rem 2rem !important; }
-          }
-        `}</style>
             </section>
 
             {/* Featured work */}
-            <section style={{ padding: '0 6rem 6rem', borderTop: '1px solid #e4e4e7' }}>
-                <div style={{ paddingTop: '4rem', marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
+            <section className="section" style={{ borderTop: '1px solid var(--color-border)' }}>
+                <div style={{ paddingBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
                     <p className="section-label">Selected work</p>
                     <Link to="/portfolio" style={{ fontSize: '0.8rem', borderBottom: '1px solid #a1a1aa', paddingBottom: '2px' }}>
                         View all ↗
@@ -145,8 +131,21 @@ export default function Home() {
                             target="_blank"
                             rel="noopener noreferrer"
                             aria-label={p.title}
+                            style={{
+                                background: p.bg || 'var(--color-hover-bg)',
+                                aspectRatio: p.aspectRatio || '4/3'
+                            }}
                         >
-                            <img src={p.img} alt={p.title} loading="lazy" />
+                            <img
+                                src={p.img}
+                                alt={p.title}
+                                loading="lazy"
+                                style={{
+                                    objectFit: p.objectFit || 'cover',
+                                    objectPosition: p.objectPosition || 'center',
+                                    filter: (p.id === 2) ? 'none' : 'grayscale(0.3)'
+                                }}
+                            />
                             <div className="work-overlay">
                                 <h3>{p.title}</h3>
                                 <p>{p.desc}</p>
@@ -157,7 +156,6 @@ export default function Home() {
                         </a>
                     ))}
                 </div>
-                <style>{`@media(max-width:1024px){.work-grid{grid-template-columns:1fr!important;}}`}</style>
             </section>
         </>
     );
@@ -177,7 +175,10 @@ const FEATURED = [
         title: 'EchoSpace Chat App',
         desc: 'Privacy-centric anonymous real-time chat with AES-256 encryption.',
         tags: ['Flutter', 'Firebase', 'AES-256', 'NLP'],
-        img: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&q=80',
+        img: echoSpaceLogo,
         link: 'https://github.com/Gopika-17-Krishna-S',
+        aspectRatio: '1/1',
+        objectFit: 'cover',
+        objectPosition: 'center',
     },
 ];

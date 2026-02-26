@@ -12,7 +12,7 @@ export default function Contact() {
     };
 
     return (
-        <main style={{ paddingTop: '5rem' }}>
+        <main className="portfolio-page">
             <section className="section">
                 <div className="section-inner">
                     <p className="section-label">Get In Touch</p>
@@ -23,13 +23,7 @@ export default function Contact() {
                     {/* Form */}
                     <div>
                         {sent ? (
-                            <div
-                                style={{
-                                    padding: '2.5rem',
-                                    border: '1px solid #e4e4e7',
-                                    textAlign: 'center',
-                                }}
-                            >
+                            <div className="sent-confirmation">
                                 <div style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>✓</div>
                                 <h3 style={{ fontWeight: 400, fontSize: '1.25rem', marginBottom: '0.5rem' }}>
                                     Message sent!
@@ -39,15 +33,7 @@ export default function Contact() {
                                 </p>
                                 <button
                                     onClick={() => { setSent(false); setForm({ name: '', email: '', message: '' }); }}
-                                    style={{
-                                        marginTop: '1.5rem',
-                                        fontSize: '0.8rem',
-                                        background: 'none',
-                                        border: 'none',
-                                        cursor: 'pointer',
-                                        color: '#71717a',
-                                        textDecoration: 'underline',
-                                    }}
+                                    className="btn-text"
                                 >
                                     Send another
                                 </button>
@@ -115,8 +101,6 @@ export default function Contact() {
                             <a href="mailto:gopikakrishnas173@gmail.com">gopikakrishnas173@gmail.com</a>
                         </div>
 
-
-
                         <div className="contact-info-item">
                             <h4>Location</h4>
                             <p>Ernakulam, Kerala, India</p>
@@ -124,25 +108,10 @@ export default function Contact() {
 
                         <div className="contact-info-item">
                             <h4>Availability</h4>
-                            <p style={{ color: '#16a34a', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                                <span
-                                    style={{
-                                        width: '8px',
-                                        height: '8px',
-                                        borderRadius: '50%',
-                                        background: '#16a34a',
-                                        display: 'inline-block',
-                                        animation: 'pulse 2s infinite',
-                                    }}
-                                />
+                            <div className="availability-status">
+                                <span className="pulse-dot" />
                                 Open to full-stack &amp; backend roles
-                            </p>
-                            <style>{`
-                @keyframes pulse {
-                  0%, 100% { opacity: 1; }
-                  50% { opacity: 0.4; }
-                }
-              `}</style>
+                            </div>
                         </div>
 
                         <div className="contact-info-item">

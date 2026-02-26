@@ -2,7 +2,7 @@ import gopikaImg from '../assets/gopika.jpeg';
 
 export default function About() {
     return (
-        <main style={{ paddingTop: '5rem' }}>
+        <main className="portfolio-page">
             <section className="section">
                 <div className="section-inner">
                     <p className="section-label">About Me</p>
@@ -35,9 +35,8 @@ export default function About() {
                                     href="https://github.com/Gopika-17-Krishna-S"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    style={btnStyle('outline')}
-                                    onMouseEnter={e => applyHover(e, true)}
-                                    onMouseLeave={e => applyHover(e, false)}
+                                    style={btnStyle()}
+                                    className="btn-outline"
                                 >
                                     GitHub ↗
                                 </a>
@@ -45,9 +44,8 @@ export default function About() {
                                     href="https://www.linkedin.com/in/gopikakrishnas17"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    style={btnStyle('outline')}
-                                    onMouseEnter={e => applyHover(e, true)}
-                                    onMouseLeave={e => applyHover(e, false)}
+                                    style={btnStyle()}
+                                    className="btn-outline"
                                 >
                                     LinkedIn ↗
                                 </a>
@@ -69,7 +67,7 @@ export default function About() {
                         {STATS.map(s => (
                             <div key={s.label}>
                                 <div className="metric-value">{s.value}</div>
-                                <div className="metric-label" style={{ marginTop: '0.35rem' }}>{s.label}</div>
+                                <div className="metric-label">{s.label}</div>
                             </div>
                         ))}
                     </div>
@@ -79,17 +77,7 @@ export default function About() {
                         <p className="section-label">Professional Experience</p>
                         <div style={{ marginTop: '1.5rem' }}>
                             {TIMELINE.map((item, i) => (
-                                <div
-                                    key={i}
-                                    style={{
-                                        display: 'grid',
-                                        gridTemplateColumns: '12rem 1fr',
-                                        gap: '2rem',
-                                        padding: '1.75rem 0',
-                                        borderBottom: '1px solid #e4e4e7',
-                                    }}
-                                    className="timeline-row"
-                                >
+                                <div key={i} className="timeline-row">
                                     <div>
                                         <div style={{ fontSize: '0.78rem', color: '#a1a1aa', letterSpacing: '0.04em' }}>{item.period}</div>
                                         <div style={{ fontSize: '0.82rem', color: '#52525b', marginTop: '0.3rem', fontWeight: 500 }}>{item.company}</div>
@@ -113,17 +101,7 @@ export default function About() {
                         <p className="section-label">Education</p>
                         <div style={{ marginTop: '1.5rem' }}>
                             {EDUCATION.map((item, i) => (
-                                <div
-                                    key={i}
-                                    style={{
-                                        display: 'grid',
-                                        gridTemplateColumns: '12rem 1fr',
-                                        gap: '2rem',
-                                        padding: '1.75rem 0',
-                                        borderBottom: '1px solid #e4e4e7',
-                                    }}
-                                    className="timeline-row"
-                                >
+                                <div key={i} className="timeline-row">
                                     <div>
                                         <div style={{ fontSize: '0.78rem', color: '#a1a1aa', letterSpacing: '0.04em' }}>{item.year}</div>
                                         {item.score && <div style={{ fontSize: '0.78rem', color: '#71717a', marginTop: '0.25rem' }}>{item.score}</div>}
@@ -142,7 +120,7 @@ export default function About() {
                     {/* Languages */}
                     <div style={{ marginTop: '5rem' }}>
                         <p className="section-label">Languages</p>
-                        <div style={{ display: 'flex', gap: '2rem', marginTop: '1.5rem' }}>
+                        <div style={{ display: 'flex', gap: '2rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
                             {['English', 'Malayalam'].map(lang => (
                                 <div key={lang} style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
                                     <span style={{ fontWeight: 500, fontSize: '0.95rem' }}>{lang}</span>
@@ -151,14 +129,7 @@ export default function About() {
                             ))}
                         </div>
                     </div>
-
                 </div>
-
-                <style>{`
-          @media (max-width: 768px) {
-            .timeline-row { grid-template-columns: 1fr !important; gap: 0.5rem !important; }
-          }
-        `}</style>
             </section>
         </main>
     );
@@ -178,11 +149,6 @@ const btnStyle = () => ({
     color: '#000',
     background: 'transparent',
 });
-
-const applyHover = (e, isHover) => {
-    e.currentTarget.style.background = isHover ? '#000' : 'transparent';
-    e.currentTarget.style.color = isHover ? '#fff' : '#000';
-};
 
 const STATS = [
     { value: '2+', label: 'Projects built' },
