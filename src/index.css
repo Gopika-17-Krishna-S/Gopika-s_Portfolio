@@ -751,7 +751,14 @@ ol {
   }
 
   .hero-image-col {
-    display: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+
+  .hero-image-wrap {
+    max-width: 450px;
+    width: 100%;
   }
 
   .hero-content {
