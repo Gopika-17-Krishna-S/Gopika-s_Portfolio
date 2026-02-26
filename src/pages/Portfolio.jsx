@@ -1,4 +1,5 @@
 import echoSpaceLogo from '../assets/echospace-logo.jpeg';
+import resQLogo from '../assets/logo.jpeg';
 
 const PROJECTS = [
     {
@@ -8,8 +9,9 @@ const PROJECTS = [
         period: '09/2025 – 02/2026',
         desc: 'A real-time emergency response platform enabling instant SOS alerts, live incident broadcasting, and 1:1 chat using Socket.IO for zero-latency communication.',
         tags: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Zustand', 'FastAPI', 'PostgreSQL', 'Socket.IO', 'JWT', 'Mapbox GL JS'],
-        img: 'https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=800&q=80',
+        img: resQLogo,
         link: 'https://github.com/Gopika-17-Krishna-S',
+        aspectRatio: '1/1',
         bullets: [
             'Developed a real-time emergency response platform enabling instant SOS alerts, live incident broadcasting, and 1:1 chat using Socket.IO for zero-latency communication.',
             'Built a scalable FastAPI backend with SQLAlchemy and PostgreSQL to manage incidents, user roles (Admin, Volunteer, Citizen), and mission lifecycle workflows.',

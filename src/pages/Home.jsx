@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import gopikaImg from '../assets/gopika.jpeg';
 import echoSpaceLogo from '../assets/echospace-logo.jpeg';
+import resQLogo from '../assets/logo.jpeg';
 
 const ArrowDown = () => (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
@@ -167,8 +168,9 @@ const FEATURED = [
         title: 'resQ Platform',
         desc: 'Real-time disaster management & coordination system with live incident mapping.',
         tags: ['Next.js 14', 'FastAPI', 'PostgreSQL', 'Socket.IO', 'Mapbox GL JS'],
-        img: 'https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=800&q=80',
+        img: resQLogo,
         link: 'https://github.com/Gopika-17-Krishna-S',
+        aspectRatio: '1/1',
     },
     {
         id: 2,
