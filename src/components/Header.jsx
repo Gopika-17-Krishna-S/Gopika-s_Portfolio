@@ -72,6 +72,9 @@ export default function Header() {
                         {link.label}
                     </NavLink>
                 ))}
+                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" onClick={() => setMenuOpen(false)}>
+                    Resume ↗
+                </a>
                 <a href="mailto:gopikakrishnas173@gmail.com" onClick={() => setMenuOpen(false)}>
                     Book A Call ↗
                 </a>

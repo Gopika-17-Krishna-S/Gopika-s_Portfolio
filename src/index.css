@@ -671,16 +671,59 @@ ol {
   animation: pulse 2s infinite;
 }
 
-@keyframes pulse {
+.btn-resume {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.75rem;
+  background: var(--color-fg);
+  color: var(--color-bg);
+  border: 1px solid var(--color-fg);
+  border-radius: 4px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-top: 2rem;
+  width: fit-content;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
 
-  0%,
-  100% {
-    opacity: 1;
-  }
+.btn-resume::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: var(--color-bg);
+  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: -1;
+}
 
-  50% {
-    opacity: 0.4;
-  }
+.btn-resume:hover {
+  color: var(--color-fg);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-resume:hover::before {
+  width: 100%;
+}
+
+.btn-resume svg {
+  transition: transform 0.3s ease;
+}
+
+.btn-resume:hover svg {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.resume-icon {
+  width: 18px;
+  height: 18px;
 }
 
 .timeline-row {
