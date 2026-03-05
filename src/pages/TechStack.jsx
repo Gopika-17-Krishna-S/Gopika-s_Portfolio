@@ -1,3 +1,21 @@
+import { useEffect, useRef } from 'react';
+
+/* Scroll-reveal utility */
+function useReveal() {
+    const ref = useRef(null);
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting) { el.classList.add('visible'); observer.disconnect(); } },
+            { threshold: 0.1 }
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
+    return ref;
+}
+
 const CATEGORIES = [
     {
         name: 'Frontend',
@@ -50,55 +68,72 @@ const CATEGORIES = [
         ],
     },
     {
-        name: 'Others',
+        name: 'Mobile & Others',
         items: [
+            { name: 'Flutter', icon: '💙', level: 75 },
+            { name: 'Firebase', icon: '🔥', level: 80 },
+            { name: 'AES-256', icon: '🔒', level: 75 },
             { name: 'Geolocation', icon: '📍', level: 80 },
             { name: 'Live Mapping', icon: '🗺️', level: 78 },
-            { name: 'AES-256', icon: '🔒', level: 75 },
-            { name: 'Firebase', icon: '🔥', level: 80 },
-            { name: 'Flutter', icon: '💙', level: 75 },
         ],
     },
 ];
 
+function CategorySection({ cat }) {
+    const ref = useReveal();
+    return (
+        <div ref={ref} className="reveal" style={{ marginTop: '4rem' }}>
+            <p
+                style={{
+                    fontSize: '0.68rem',
+                    letterSpacing: '0.16em',
+                    textTransform: 'uppercase',
+                    color: '#10b981',
+                    marginBottom: '0.85rem',
+                    fontWeight: 600,
+                }}
+            >
+                {cat.name}
+            </p>
+            <div className="tech-grid">
+                {cat.items.map(tech => (
+                    <div
+                        className="tech-item"
+                        key={tech.name}
+                        title={`${tech.level}% proficiency`}
+                    >
+                        <span className="tech-icon" role="img" aria-label={tech.name}>{tech.icon}</span>
+                        <span className="tech-name">{tech.name}</span>
+                        <div className="tech-level" aria-label={`${tech.level}% proficiency`}>
+                            <div
+                                className="tech-level-fill"
+                                style={{ width: `${tech.level}%` }}
+                            />
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+}
+
 export default function TechStack() {
+    const headerRef = useReveal();
+
     return (
         <main style={{ paddingTop: '5rem' }}>
             <section className="section">
-                <div className="section-inner">
+                <div className="section-inner reveal" ref={headerRef}>
                     <p className="section-label">Technologies</p>
                     <h1 className="section-title">Tech Stack</h1>
-                    <p style={{ fontSize: '1rem', color: '#71717a', maxWidth: '520px', marginTop: '1rem', lineHeight: 1.7 }}>
+                    <p style={{ fontSize: '1rem', color: '#71717a', maxWidth: '520px', marginTop: '1rem', lineHeight: 1.75 }}>
                         A curated set of tools and technologies I use to build modern, production-ready
                         applications — from scalable APIs to real-time, responsive frontends.
                     </p>
                 </div>
 
                 {CATEGORIES.map(cat => (
-                    <div key={cat.name} style={{ marginTop: '4rem' }}>
-                        <p
-                            style={{
-                                fontSize: '0.7rem',
-                                letterSpacing: '0.12em',
-                                textTransform: 'uppercase',
-                                color: '#a1a1aa',
-                                marginBottom: '0.75rem',
-                            }}
-                        >
-                            {cat.name}
-                        </p>
-                        <div className="tech-grid">
-                            {cat.items.map(tech => (
-                                <div className="tech-item" key={tech.name} title={`${tech.level}% proficiency`}>
-                                    <span className="tech-icon" role="img" aria-label={tech.name}>{tech.icon}</span>
-                                    <span className="tech-name">{tech.name}</span>
-                                    <div className="tech-level" aria-label={`${tech.level}% proficiency`}>
-                                        <div className="tech-level-fill" style={{ width: `${tech.level}%` }} />
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                    <CategorySection key={cat.name} cat={cat} />
                 ))}
             </section>
         </main>

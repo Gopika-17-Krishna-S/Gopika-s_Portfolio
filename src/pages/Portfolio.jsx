@@ -1,5 +1,22 @@
+import { useEffect, useRef } from 'react';
 import echoSpaceLogo from '../assets/echospace-logo.jpeg';
 import resQLogo from '../assets/logo.jpeg';
+
+function useReveal(delay = 0) {
+    const ref = useRef(null);
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        el.style.transitionDelay = `${delay}ms`;
+        const observer = new IntersectionObserver(
+            ([entry]) => { if (entry.isIntersecting) { el.classList.add('visible'); observer.disconnect(); } },
+            { threshold: 0.08 }
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, [delay]);
+    return ref;
+}
 
 const PROJECTS = [
     {
@@ -42,11 +59,81 @@ const PROJECTS = [
     },
 ];
 
+function ProjectCard({ p, index }) {
+    const cardRef = useReveal(index * 150);
+    return (
+        <div ref={cardRef} className="reveal" style={{ borderTop: '1px solid var(--color-border)' }}>
+            {/* Hero image */}
+            <div
+                className="work-item"
+                style={{ aspectRatio: '16/7', borderRadius: 0, background: p.bg || 'var(--color-hover-bg)', cursor: 'default' }}
+            >
+                <img
+                    src={p.img}
+                    alt={p.title}
+                    loading="lazy"
+                    style={{
+                        objectFit: p.objectFit || 'cover',
+                        objectPosition: p.objectPosition || 'center',
+                    }}
+                />
+                <div className="work-overlay" style={{ opacity: 1, background: 'linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 55%)' }}>
+                    <div style={{ display: 'flex', gap: '0.45rem', flexWrap: 'wrap', marginBottom: '0.75rem' }}>
+                        {p.tags.map(t => <span className="work-tag" key={t}>{t}</span>)}
+                    </div>
+                </div>
+            </div>
+
+            {/* Detail */}
+            <div className="project-detail">
+                <div>
+                    <p style={{ fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#a1a1aa', marginBottom: '0.5rem' }}>{p.period}</p>
+                    <h2 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '1.4rem', fontWeight: 500, letterSpacing: '-0.02em', lineHeight: 1.3 }}>{p.title}</h2>
+                    <p style={{ fontSize: '0.85rem', color: '#71717a', marginTop: '0.35rem', fontStyle: 'italic' }}>{p.subtitle}</p>
+                    <a
+                        href={p.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '0.4rem',
+                            marginTop: '1.5rem',
+                            fontSize: '0.8rem',
+                            fontWeight: 600,
+                            color: '#10b981',
+                            borderBottom: '1.5px solid #10b981',
+                            paddingBottom: '2px',
+                            transition: 'opacity 0.2s',
+                            letterSpacing: '0.01em',
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.opacity = '0.6'}
+                        onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+                    >
+                        View on GitHub ↗
+                    </a>
+                </div>
+                <div>
+                    <p style={{ fontSize: '1rem', color: '#3f3f46', lineHeight: 1.85, marginBottom: '1.25rem' }}>{p.desc}</p>
+                    <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', paddingLeft: '1.1rem' }}>
+                        {p.bullets.map((b, i) => (
+                            <li key={i} style={{ fontSize: '0.875rem', color: '#52525b', lineHeight: 1.75, listStyleType: 'disc' }}>{b}</li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 export default function Portfolio() {
+    const headerRef = useReveal(0);
+    const ctaRef = useReveal(0);
+
     return (
         <main className="portfolio-page">
             <section className="section">
-                <div className="section-inner">
+                <div className="section-inner reveal" ref={headerRef}>
                     <p className="section-label">Selected Work</p>
                     <h1 className="section-title">Portfolio</h1>
                     <p className="section-desc">
@@ -56,68 +143,12 @@ export default function Portfolio() {
 
                 {/* Project Cards */}
                 <div style={{ marginTop: '4rem', display: 'flex', flexDirection: 'column', gap: '1px' }}>
-                    {PROJECTS.map(p => (
-                        <div key={p.id} style={{ borderTop: '1px solid var(--color-border)' }}>
-                            {/* Hero image */}
-                            <div className="work-item" style={{ aspectRatio: p.aspectRatio || '16/7', borderRadius: 0, background: p.bg || 'var(--color-hover-bg)' }}>
-                                <img
-                                    src={p.img}
-                                    alt={p.title}
-                                    loading="lazy"
-                                    style={{
-                                        objectFit: p.objectFit || 'cover',
-                                        objectPosition: p.objectPosition || 'center',
-                                        filter: (p.id === 2) ? 'none' : 'grayscale(0.3)'
-                                    }}
-                                />
-                                <div className="work-overlay" style={{ opacity: 1, background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%)' }}>
-                                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.75rem' }}>
-                                        {p.tags.map(t => <span className="work-tag" key={t}>{t}</span>)}
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Detail */}
-                            <div className="project-detail">
-                                <div>
-                                    <p style={{ fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#a1a1aa', marginBottom: '0.5rem' }}>{p.period}</p>
-                                    <h2 style={{ fontSize: '1.4rem', fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.3 }}>{p.title}</h2>
-                                    <p style={{ fontSize: '0.85rem', color: '#71717a', marginTop: '0.35rem', fontStyle: 'italic' }}>{p.subtitle}</p>
-                                    <a
-                                        href={p.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        style={{
-                                            display: 'inline-flex',
-                                            alignItems: 'center',
-                                            gap: '0.4rem',
-                                            marginTop: '1.5rem',
-                                            fontSize: '0.8rem',
-                                            fontWeight: 500,
-                                            borderBottom: '1px solid #000',
-                                            paddingBottom: '2px',
-                                            transition: 'opacity 0.2s',
-                                        }}
-                                        onMouseEnter={e => e.currentTarget.style.opacity = '0.5'}
-                                        onMouseLeave={e => e.currentTarget.style.opacity = '1'}
-                                    >
-                                        View on GitHub ↗
-                                    </a>
-                                </div>
-                                <div>
-                                    <p style={{ fontSize: '1rem', color: '#3f3f46', lineHeight: 1.8, marginBottom: '1.25rem' }}>{p.desc}</p>
-                                    <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', paddingLeft: '1.1rem' }}>
-                                        {p.bullets.map((b, i) => (
-                                            <li key={i} style={{ fontSize: '0.875rem', color: '#52525b', lineHeight: 1.7, listStyleType: 'disc' }}>{b}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                    {PROJECTS.map((p, i) => (
+                        <ProjectCard key={p.id} p={p} index={i} />
                     ))}
                 </div>
 
-                <div style={{ marginTop: '6rem', textAlign: 'center' }}>
+                <div className="reveal" ref={ctaRef} style={{ marginTop: '6rem', textAlign: 'center' }}>
                     <a
                         href="https://github.com/Gopika-17-Krishna-S"
                         target="_blank"
@@ -126,14 +157,26 @@ export default function Portfolio() {
                             display: 'inline-flex',
                             alignItems: 'center',
                             gap: '0.5rem',
-                            fontSize: '0.9rem',
-                            fontWeight: 500,
-                            border: '1px solid #000',
+                            fontSize: '0.875rem',
+                            fontWeight: 600,
+                            border: '1.5px solid #000',
                             padding: '1rem 2.5rem',
-                            transition: 'all 0.25s',
+                            transition: 'all 0.25s cubic-bezier(0.4,0,0.2,1)',
+                            borderRadius: '6px',
+                            letterSpacing: '0.02em',
                         }}
-                        onMouseEnter={e => { e.currentTarget.style.background = '#000'; e.currentTarget.style.color = '#fff'; }}
-                        onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = '#000'; }}
+                        onMouseEnter={e => {
+                            e.currentTarget.style.background = '#000';
+                            e.currentTarget.style.color = '#fff';
+                            e.currentTarget.style.transform = 'translateY(-2px)';
+                            e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.12)';
+                        }}
+                        onMouseLeave={e => {
+                            e.currentTarget.style.background = 'transparent';
+                            e.currentTarget.style.color = '#000';
+                            e.currentTarget.style.transform = '';
+                            e.currentTarget.style.boxShadow = '';
+                        }}
                     >
                         See all projects on GitHub ↗
                     </a>

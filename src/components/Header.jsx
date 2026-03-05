@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react';
 import { NavLink, Link } from 'react-router-dom';
 
 const Logo = () => (
-    <svg viewBox="0 0 24 24" fill="currentColor" className="logo" aria-label="Gopika Krishna S Portfolio">
-        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+    <svg viewBox="0 0 32 32" fill="none" className="logo" aria-label="Gopika Krishna S Portfolio">
+        <circle cx="16" cy="16" r="15" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M10 22 L16 10 L22 22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M12 19h8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
 );
 
@@ -22,8 +24,8 @@ export default function Header() {
     }, [menuOpen]);
 
     const navLinks = [
-        { to: '/about', label: 'About Me' },
-        { to: '/portfolio', label: 'Portfolio' },
+        { to: '/about', label: 'About' },
+        { to: '/portfolio', label: 'Projects' },
         { to: '/tech-stack', label: 'Tech Stack' },
         { to: '/contact', label: 'Contact' },
     ];
@@ -32,7 +34,7 @@ export default function Header() {
         <>
             <header className={`header${scrolled ? ' scrolled' : ''}`}>
                 <div className="header-left">
-                    <Link to="/" onClick={() => setMenuOpen(false)}>
+                    <Link to="/" onClick={() => setMenuOpen(false)} aria-label="Home">
                         <Logo />
                     </Link>
                     <nav className="nav" aria-label="Main navigation">
@@ -47,12 +49,27 @@ export default function Header() {
                         ))}
                     </nav>
                 </div>
-                <a className="cta-link" href="mailto:gopikakrishnas173@gmail.com">
-                    Book A Call <span>↗</span>
-                </a>
+
+                <div style={{ display:'flex', alignItems:'center', gap:'1rem' }}>
+                    {/* Open-to-work badge — hidden on small screens */}
+                    <span
+                        className="availability-status"
+                        style={{ fontSize:'0.7rem', padding:'0.3rem 0.7rem', display: 'flex' }}
+                        title="Open to full-stack & backend roles"
+                    >
+                        <span className="pulse-dot" />
+                        Open to work
+                    </span>
+
+                    <a className="cta-link" href="mailto:gopikakrishnas173@gmail.com" aria-label="Hire Gopika Krishna S">
+                        Hire me ↗
+                    </a>
+                </div>
+
                 <button
                     className="hamburger"
                     aria-label="Toggle menu"
+                    aria-expanded={menuOpen}
                     onClick={() => setMenuOpen(m => !m)}
                 >
                     <span style={{ transform: menuOpen ? 'rotate(45deg) translate(5px, 5px)' : '' }} />
@@ -62,7 +79,7 @@ export default function Header() {
             </header>
 
             {/* Mobile full-screen nav */}
-            <div className={`mobile-nav${menuOpen ? ' open' : ''}`} role="dialog" aria-modal="true">
+            <div className={`mobile-nav${menuOpen ? ' open' : ''}`} role="dialog" aria-modal="true" aria-label="Mobile menu">
                 {navLinks.map(link => (
                     <NavLink
                         key={link.to}
@@ -76,7 +93,7 @@ export default function Header() {
                     Resume ↗
                 </a>
                 <a href="mailto:gopikakrishnas173@gmail.com" onClick={() => setMenuOpen(false)}>
-                    Book A Call ↗
+                    Hire Me ↗
                 </a>
             </div>
         </>
