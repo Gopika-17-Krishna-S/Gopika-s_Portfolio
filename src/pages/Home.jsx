@@ -29,7 +29,7 @@ export default function Home() {
                     {/* Metrics */}
                     <div className="metrics-row" aria-label="Key statistics">
                         <div>
-                            <div className="metric-value" aria-label="2 major projects">2+</div>
+                            <div className="metric-value" aria-label="3 major projects">3+</div>
                             <div className="metric-label">Projects<br />Built</div>
                         </div>
                         <div>
@@ -112,8 +112,8 @@ export default function Home() {
                     <p style={{ fontSize: '1.05rem', color: '#52525b', lineHeight: 1.8, marginBottom: '2rem' }}>
                         Hi, I'm <strong style={{ color: '#000' }}>Gopika Krishna S</strong> — a motivated Python Full Stack
                         Developer with hands-on experience designing, developing, and deploying scalable web
-                        applications using <strong style={{ color: '#000' }}>Python, Django, React.js, FastAPI</strong>,
-                        and RESTful APIs. Based in Ernakulam, Kerala, India.
+                        applications using <strong style={{ color: '#000' }}>Python, Django, React.js, RESTful APIs, and MySQL</strong>.
+                        Based in Ernakulam, Kerala, India.
                     </p>
                     <Link
                         to="/about"
@@ -154,16 +154,18 @@ export default function Home() {
                                 aspectRatio: p.aspectRatio || '4/3'
                             }}
                         >
-                            <img
-                                src={p.img}
-                                alt={p.title}
-                                loading="lazy"
-                                style={{
-                                    objectFit: p.objectFit || 'cover',
-                                    objectPosition: p.objectPosition || 'center',
-                                    filter: (p.id === 2) ? 'none' : 'grayscale(0.3)'
-                                }}
-                            />
+                            {p.img && (
+                                <img
+                                    src={p.img}
+                                    alt={p.title}
+                                    loading="lazy"
+                                    style={{
+                                        objectFit: p.objectFit || 'cover',
+                                        objectPosition: p.objectPosition || 'center',
+                                        filter: (p.id === 3) ? 'none' : 'grayscale(0.3)'
+                                    }}
+                                />
+                            )}
                             <div className="work-overlay">
                                 <h3>{p.title}</h3>
                                 <p>{p.desc}</p>
@@ -182,15 +184,23 @@ export default function Home() {
 const FEATURED = [
     {
         id: 1,
-        title: 'resQ Platform',
-        desc: 'Real-time disaster management & coordination system with live incident mapping.',
-        tags: ['Next.js 14', 'FastAPI', 'PostgreSQL', 'Socket.IO', 'Mapbox GL JS'],
-        img: resQLogo,
+        title: 'AutoDoc AI',
+        desc: 'Automated Codebase Documentation and API Visualization Platform.',
+        tags: ['Django', 'Python', 'Bootstrap', 'SQLite'],
         link: 'https://github.com/Gopika-17-Krishna-S',
         aspectRatio: '1/1',
     },
     {
         id: 2,
+        title: 'resQ Platform',
+        desc: 'Real-time disaster management & coordination system with live incident mapping.',
+        tags: ['Next.js 14', 'FastAPI', 'Socket.IO', 'Mapbox GL JS'],
+        img: resQLogo,
+        link: 'https://github.com/Gopika-17-Krishna-S',
+        aspectRatio: '1/1',
+    },
+    {
+        id: 3,
         title: 'EchoSpace Chat App',
         desc: 'Privacy-centric anonymous real-time chat with AES-256 encryption.',
         tags: ['Flutter', 'Firebase', 'AES-256', 'NLP'],

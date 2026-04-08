@@ -14,21 +14,20 @@ export default function About() {
                             <p>
                                 I'm a <strong>Python Full Stack Developer</strong> with hands-on experience in
                                 designing, developing, and deploying scalable web applications using{' '}
-                                <strong>Python, Django, React.js, FastAPI</strong>, RESTful APIs, and MySQL.
+                                <strong>Python, Django, React.js, RESTful APIs, and MySQL</strong>.
                             </p>
                             <p>
                                 I have strong expertise in <strong>CRUD operations, API integration,
-                                    authentication systems</strong>, and responsive UI development. I enjoy working
-                                across the entire stack — from architecting robust backends to building
-                                polished, performant frontends.
+                                    authentication systems</strong>, and responsive UI development.
                             </p>
                             <p>
                                 Proven ability to collaborate in team environments, write clean and maintainable
-                                code, and deliver <strong>secure, performance-optimised solutions</strong>.
+                                code, and deliver <strong>secure, performance-optimized solutions</strong>.
                                 Actively seeking full-stack or backend developer roles.
                             </p>
                             <p style={{ fontSize: '0.9rem', color: '#71717a', marginTop: '0.5rem' }}>
-                                📍 Ernakulam, Kerala, India
+                                📍 Ernakulam, Kerala, India <br />
+                                ✉️ gopikakrishnas173@gmail.com | 📞 +919895912899
                             </p>
                             <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                                 <a
@@ -167,7 +166,7 @@ const btnStyle = () => ({
 });
 
 const STATS = [
-    { value: '2+', label: 'Projects built' },
+    { value: '3+', label: 'Projects built' },
     { value: '+10', label: 'Languages & Frameworks' },
     { value: '1+', label: 'Years of experience' },
     { value: '3', label: 'Internships completed' },
@@ -176,18 +175,14 @@ const STATS = [
 const TIMELINE = [
     {
         period: '06/2025 – Ongoing',
-        company: 'SMEC Labs',
+        company: 'SMEC Technologies',
         location: 'Kochi, Kerala',
         role: 'Python Full Stack Intern',
         bullets: [
-            'Developed and maintained full-stack application modules using Python, Django, and REST APIs, improving data handling efficiency.',
-            'Designed and integrated MySQL databases using Django ORM, optimizing query performance and ensuring secure data storage.',
-            'Developed a real-time emergency response platform (resQ) using FastAPI and PostgreSQL, enabling instant SOS alerts and live incident tracking.',
-            'Built responsive dashboards and dynamic UI components using Next.js 14, TypeScript, and Tailwind CSS to support Admin, Volunteer, and Citizen roles.',
-            'Implemented RESTful APIs and WebSocket communication (Socket.IO) for zero-latency notifications, real-time chat, and live mission updates.',
-            'Designed secure JWT-based authentication (Access & Refresh Tokens).',
-            'Integrated Mapbox GL JS for geolocation tracking and smart responder assignment based on proximity logic.',
-            'Managed version control with Git & GitHub, performed API testing using Postman, debugging, and optimized system performance for scalability.',
+            'Engineered a scalable full-stack emergency response platform (resQ) using Python, and FastAPI, enabling real-time SOS alerts, live incident tracking, and mission workflows.',
+            'Designed and optimized MySQL/PostgreSQL databases using Django ORM, improving query performance, data integrity, and secure storage.',
+            'Developed RESTful APIs and implemented WebSocket (Socket.IO) for zero-latency real-time notifications, live chat, and mission updates.',
+            'Built responsive dashboards using Next.js 14, TypeScript, and Tailwind CSS, integrated Mapbox GL JS for geolocation and smart responder assignment, with Git/GitHub workflows and Postman API testing.',
         ],
     },
     {
@@ -202,12 +197,11 @@ const TIMELINE = [
         ],
     },
     {
-        period: '05/2023 – 06/2023',
+        period: '05/2023',
         company: 'RIGHTSOFT OPTIONS',
         location: 'Kochi, Kerala',
         role: 'Web Development Intern',
         bullets: [
-            'Developed and optimized web applications using Python and relational databases.',
             'Automated backend data processing tasks, reducing manual effort and improving workflow efficiency.',
             'Enhanced application performance through modular code structure and best coding practices.',
         ],
