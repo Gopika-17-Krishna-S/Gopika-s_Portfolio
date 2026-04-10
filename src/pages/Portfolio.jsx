@@ -1,5 +1,6 @@
 import echoSpaceLogo from '../assets/echospace-logo.jpeg';
 import resQLogo from '../assets/logo.jpeg';
+import autoLogo from '../assets/auto-logo.png';
 
 const PROJECTS = [
     {
@@ -9,8 +10,11 @@ const PROJECTS = [
         period: '02/2026 – 04/2026',
         desc: 'An automated documentation platform to parse large codebases, extract project structure, and generate API visualizations using Python AST and custom parsing utilities.',
         tags: ['Django', 'Python', 'Bootstrap', 'HTML', 'CSS', 'SQLite', 'Git', 'GitHub'],
-        link: 'https://github.com/Gopika-17-Krishna-S',
-        aspectRatio: '16/7',
+        img: autoLogo,
+        link: 'https://github.com/Gopika-17-Krishna-S/AutoDoc-AI',
+        aspectRatio: '16/10',
+        objectFit: 'contain',
+        bg: '#000',
         bullets: [
             'Developed an automated documentation platform to parse large codebases, extract project structure, and generate API visualizations using Python AST and custom parsing utilities.',
             'Built a scalable Django backend with efficient routing, database models, and secure file handling to manage project uploads, parsed data, and user session workflows with JSON export support.',
@@ -25,8 +29,10 @@ const PROJECTS = [
         desc: 'A real-time emergency response platform enabling instant SOS alerts, live incident broadcasting, and 1:1 chat using Socket.IO for zero-latency communication.',
         tags: ['Next.js 14', 'TypeScript', 'Tailwind CSS', 'Zustand', 'FastAPI', 'PostgreSQL', 'Socket.IO', 'JWT', 'Mapbox GL JS'],
         img: resQLogo,
-        link: 'https://github.com/Gopika-17-Krishna-S',
-        aspectRatio: '16/7',
+        link: 'https://github.com/Gopika-17-Krishna-S/resQ_platform',
+        aspectRatio: '16/10',
+        objectFit: 'contain',
+        bg: '#444',
         bullets: [
             'Developed a real-time emergency response platform enabling instant SOS alerts, live incident broadcasting, and 1:1 chat using Socket.IO for zero-latency communication.',
             'Built a scalable FastAPI backend with SQLAlchemy and PostgreSQL to manage incidents, user roles (Admin, Volunteer, Citizen), and mission lifecycle workflows.',
@@ -42,10 +48,11 @@ const PROJECTS = [
         desc: 'A privacy-first anonymous chat application with temporary topic-based spaces and auto-deleting messages using Firestore TTL and lifecycle management logic.',
         tags: ['Flutter', 'Dart', 'Firebase', 'AES-256 Encryption', 'Trie Data Structure', 'Text Embeddings'],
         img: echoSpaceLogo,
-        objectFit: 'cover',
+        objectFit: 'contain',
         objectPosition: 'center',
-        link: 'https://github.com/Gopika-17-Krishna-S',
-        aspectRatio: '16/7',
+        link: 'https://github.com/Gopika-17-Krishna-S/EchoSpace',
+        aspectRatio: '16/10',
+        bg: '#000',
         bullets: [
             'Developed a privacy-first anonymous chat application with temporary topic-based spaces and auto-deleting messages using Firestore TTL and lifecycle management logic.',
             'Implemented secure Firebase Authentication (email verification), strict Firestore security rules, and AES-256 encryption to ensure data confidentiality and minimal retention.',
@@ -81,14 +88,14 @@ export default function Portfolio() {
                                         style={{
                                             objectFit: p.objectFit || 'cover',
                                             objectPosition: p.objectPosition || 'center',
-                                            filter: (p.id === 3) ? 'none' : 'grayscale(0.3)'
+                                            padding: p.padding || '0',
+                                            backgroundColor: p.bg || 'transparent',
+                                            filter: (p.id === 3 || p.id === 1) ? 'none' : 'grayscale(0.3)'
                                         }}
                                     />
                                 )}
-                                <div className="work-overlay" style={{ opacity: 1, background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%)' }}>
-                                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '0.75rem' }}>
-                                        {p.tags.map(t => <span className="work-tag" key={t}>{t}</span>)}
-                                    </div>
+                                <div className="work-overlay" style={{ opacity: 1, background: 'none' }}>
+                                    {/* Removed tags from overlay to prevent clutter */}
                                 </div>
                             </div>
 
@@ -98,6 +105,23 @@ export default function Portfolio() {
                                     <p style={{ fontSize: '0.7rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#a1a1aa', marginBottom: '0.5rem' }}>{p.period}</p>
                                     <h2 style={{ fontSize: '1.4rem', fontWeight: 400, letterSpacing: '-0.02em', lineHeight: 1.3 }}>{p.title}</h2>
                                     <p style={{ fontSize: '0.85rem', color: '#71717a', marginTop: '0.35rem', fontStyle: 'italic' }}>{p.subtitle}</p>
+                                    
+                                    <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '1rem' }}>
+                                        {p.tags.map(t => (
+                                            <span 
+                                                key={t} 
+                                                style={{ 
+                                                    fontSize: '0.65rem', 
+                                                    border: '1px solid var(--color-border)', 
+                                                    padding: '0.2rem 0.6rem', 
+                                                    borderRadius: '999px',
+                                                    color: 'var(--color-subtle)'
+                                                }}
+                                            >
+                                                {t}
+                                            </span>
+                                        ))}
+                                    </div>
                                     <a
                                         href={p.link}
                                         target="_blank"

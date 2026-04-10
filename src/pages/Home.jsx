@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import gopikaImg from '../assets/gopika.jpeg';
 import echoSpaceLogo from '../assets/echospace-logo.jpeg';
 import resQLogo from '../assets/logo.jpeg';
+import autoLogo from '../assets/auto-logo.png';
 
 const ArrowDown = () => (
     <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
@@ -162,7 +163,11 @@ export default function Home() {
                                     style={{
                                         objectFit: p.objectFit || 'cover',
                                         objectPosition: p.objectPosition || 'center',
-                                        filter: (p.id === 3) ? 'none' : 'grayscale(0.3)'
+                                        padding: p.padding || '0',
+                                        backgroundColor: p.bgImg || 'transparent',
+                                        width: '100%',
+                                        height: '100%',
+                                        filter: (p.id === 3 || p.id === 1) ? 'none' : 'grayscale(0.3)'
                                     }}
                                 />
                             )}
@@ -187,8 +192,10 @@ const FEATURED = [
         title: 'AutoDoc AI',
         desc: 'Automated Codebase Documentation and API Visualization Platform.',
         tags: ['Django', 'Python', 'Bootstrap', 'SQLite'],
-        link: 'https://github.com/Gopika-17-Krishna-S',
+        img: autoLogo,
+        link: 'https://github.com/Gopika-17-Krishna-S/AutoDoc-AI',
         aspectRatio: '1/1',
+        objectFit: 'cover',
     },
     {
         id: 2,
@@ -196,7 +203,7 @@ const FEATURED = [
         desc: 'Real-time disaster management & coordination system with live incident mapping.',
         tags: ['Next.js 14', 'FastAPI', 'Socket.IO', 'Mapbox GL JS'],
         img: resQLogo,
-        link: 'https://github.com/Gopika-17-Krishna-S',
+        link: 'https://github.com/Gopika-17-Krishna-S/resQ_platform',
         aspectRatio: '1/1',
     },
     {
@@ -205,7 +212,7 @@ const FEATURED = [
         desc: 'Privacy-centric anonymous real-time chat with AES-256 encryption.',
         tags: ['Flutter', 'Firebase', 'AES-256', 'NLP'],
         img: echoSpaceLogo,
-        link: 'https://github.com/Gopika-17-Krishna-S',
+        link: 'https://github.com/Gopika-17-Krishna-S/EchoSpace',
         aspectRatio: '1/1',
         objectFit: 'cover',
         objectPosition: 'center',
